@@ -1,8 +1,7 @@
-
 :- use_module(library(plunit)).
 :- consult('code/G17_q2.pl').
 
-:- begin_tests(p2_expression_engine).
+:- begin_tests(p2_check).
 
 % -------------------------
 % Tests for split/3
@@ -96,4 +95,71 @@ test(expr_three_numbers_count) :-
     findall(Tree-Value, expr([4,2,5], Tree, Value), Results),
     length(Results, 21).
 
-:- end_tests(p2_expression_engine).
+
+
+
+
+% Mandatory assignment example: exactly 7 equations
+test(mandatory_example) :-
+    all_equations([4,2,5,3], [
+        "4*2-5=3",
+        "4*2=5+3",
+        "4-2=5-3",
+        "4/2=5-3",
+        "4=2*(5-3)",
+        "4=2+(5-3)",
+        "4=2+5-3"
+    ]).
+
+% Example with exactly one equation
+test(single_equation) :-
+    all_equations([2,4,8], ["2*4=8"]).
+
+% Example with no valid equations
+test(no_equations) :-
+    all_equations([2,3,4], []).
+
+% Empty and singleton input
+test(empty_input) :-
+    all_equations([], []).
+
+test(singleton_input) :-
+    all_equations([5], []).
+
+% Check generate_equation returns one valid equation
+test(generate_valid) :-
+    generate_equation([2,4,8], "2*4=8").
+
+test(generate_invalid, [fail]) :-
+    generate_equation([2,3,4], _).
+
+% Check equation strings are sorted and duplicate-free
+test(sorted_unique) :-
+    all_equations([4,2,5,3], E),
+    sort(E, E).
+
+% Check every result is a Prolog string
+test(string_results) :-
+    all_equations([4,2,5,3], E),
+    maplist(string, E).
+
+% Check equation count
+test(correct_count) :-
+    count_equations([4,2,5,3], 7).
+
+test(single_count) :-
+    count_equations([2,4,8], 1).
+
+test(zero_count) :-
+    count_equations([2,3,4], 0).
+
+% Check invalid division
+test(inexact_division, [fail]) :-
+    apply_op('/', 7, 2, _).
+
+test(division_by_zero, [fail]) :-
+    apply_op('/', 8, 0, _).
+
+:- end_tests(p2_check).
+
+
