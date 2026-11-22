@@ -17,6 +17,7 @@
         (loop (cdr rest) (cons (car rest) acc)))))
 
 
+
 ; map of () is (); map of (a . rest) is (f a) consed onto map of rest
 (define (my-map f lst)
   (let loop ((rest lst) (acc '()))
