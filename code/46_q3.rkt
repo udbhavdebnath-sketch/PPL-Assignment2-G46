@@ -12,3 +12,11 @@
       '()
       (my-append (inorder-values (cadr tree))
                  (cons (car tree) (inorder-values (caddr tree))))))
+
+; Preorder of () is (); otherwise place the node before the left and right subtree values.
+(define (preorder-values tree)
+  (if (null? tree)
+      '()
+      (cons (car tree)
+            (my-append (preorder-values (cadr tree))
+                       (preorder-values (caddr tree))))))
