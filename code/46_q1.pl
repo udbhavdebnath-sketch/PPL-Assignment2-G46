@@ -136,3 +136,26 @@ main :-
 
     format('~a = [~a, ~a, ~a]~n',
            [Name4, Dept4, Lang4, Project4]).
+
+
+% Check whether a solution satisfies all the active clues.
+
+satisfies_active([], _).
+
+satisfies_active([ClueNo|Rest], Solution) :-
+    clue(ClueNo, Solution),
+    satisfies_active(Rest, Solution).
+
+
+% Count the number of solutions satisfying the active clues.
+
+count_solutions(Active, N) :-
+    findall(
+        Solution,
+        (
+            base_solution(Solution),
+            satisfies_active(Active, Solution)
+        ),
+        Solutions
+    ),
+    length(Solutions, N).
