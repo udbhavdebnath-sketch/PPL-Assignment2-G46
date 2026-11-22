@@ -74,4 +74,10 @@ equation(Numbers, Equation) :-
     tree_string(LeftTree, LeftString),
     tree_string(RightTree, RightString),
     format(string(Equation), "~s=~s", [LeftString, RightString]).
+
+%% generate_equation(+Numbers, -Equation)
+%  Declarative reading: Equation is the first valid equation generated for Numbers.
+%  once/1 limits this public predicate to the first solution of equation/2.
+generate_equation(Numbers, Equation) :-
+    once(equation(Numbers, Equation)).
     
