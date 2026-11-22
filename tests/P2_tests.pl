@@ -1,5 +1,5 @@
 :- use_module(library(plunit)).
-:- consult('code/G17_q2.pl').
+:- consult('code/46_q2.pl').
 
 :- begin_tests(p2_check).
 
