@@ -7,8 +7,6 @@
         acc
         (loop (cdr rest) (+ acc 1)))))
 
-
-
 ; reverse of () is acc; reverse of (a . rest) is reverse of rest with a consed onto acc
 (define (my-reverse lst)
   (let loop ((rest lst) (acc '()))
@@ -16,31 +14,12 @@
         acc
         (loop (cdr rest) (cons (car rest) acc)))))
 
-
-
 ; map of () is (); map of (a . rest) is (f a) consed onto map of rest
 (define (my-map f lst)
   (let loop ((rest lst) (acc '()))
     (if (null? rest)
         (my-reverse acc)
         (loop (cdr rest) (cons (f (car rest)) acc)))))
-
-
-
-; insert of lst: apply insert to every sublist of lst (atoms stay as they are),
-; then cons x onto the result if lst's original length is less than n
-(define (insert-if-short x lst n)
-  (let ((processed
-         (my-map (lambda (e)
-                   (if (or (null? e) (pair? e))
-                       (insert-if-short x e n)
-                       e))
-                 lst)))
-    (if (< (my-length lst) n)
-        (cons x processed)
-        processed)))
-
-
 
 ; make-inserter returns a closure that captures x and len-ok?.
 ; Reading of the returned function: apply it to every sublist of lst (atoms stay
@@ -59,6 +38,6 @@
                     processed)))))
     insert))
 
-
-
-    
+; insert-if-short is make-inserter with len-ok? true when the original length is less than n
+(define (insert-if-short x lst n)
+  ((make-inserter x (lambda (k) (< k n))) lst))
