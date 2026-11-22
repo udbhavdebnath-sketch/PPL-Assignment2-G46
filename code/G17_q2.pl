@@ -86,4 +86,10 @@ generate_equation(Numbers, Equation) :-
 all_equations(Numbers, Equations) :-
     findall(Equation, equation(Numbers, Equation), Generated),
     sort(Generated, Equations).
+
+%% count_equations(+Numbers, -N)
+%  Declarative reading: N is the number of unique valid equations for Numbers.
+count_equations(Numbers, N) :-
+    all_equations(Numbers, Equations),
+    length(Equations, N).
     
