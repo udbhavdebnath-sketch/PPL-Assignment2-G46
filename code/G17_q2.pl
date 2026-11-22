@@ -32,4 +32,35 @@ expr(Numbers, op(Op, LeftTree, RightTree), Value) :-
     expr(RightNumbers, RightTree, RightValue),
     member(Op, ['+', '-', '*', '/']),
     apply_op(Op, LeftValue, RightValue, Value).
+
+%% prec(+Op, -Precedence)
+%  Declarative reading: Precedence is the precedence level assigned to Op.
+prec('+', 1).
+prec('-', 1).
+prec('*', 2).
+prec('/', 2).
+
+%% tree_string(+Tree, -String)
+%  Declarative reading: String is the canonical, space-free representation of Tree.
+tree_string(num(N), String) :-
+    number_string(N, String).
+tree_string(op(Op, LeftTree, RightTree), String) :-
+    tree_string(LeftTree, LeftString),
+    tree_string(RightTree, RightString),
+    prec(Op, ParentPrecedence),
+    % These conditionals apply the distinct left and right parenthesis rules.
+    (   LeftTree = op(LeftOp, _, _),
+        prec(LeftOp, LeftPrecedence),
+        LeftPrecedence < ParentPrecedence
+    ->  format(string(ParenthesizedLeft), "(~s)", [LeftString])
+    ;   ParenthesizedLeft = LeftString
+    ),
+    (   RightTree = op(RightOp, _, _),
+        prec(RightOp, RightPrecedence),
+        RightPrecedence =< ParentPrecedence
+    ->  format(string(ParenthesizedRight), "(~s)", [RightString])
+    ;   ParenthesizedRight = RightString
+    ),
+    atom_string(Op, OperatorString),
+    format(string(String), "~s~s~s", [ParenthesizedLeft, OperatorString, ParenthesizedRight]).
     
