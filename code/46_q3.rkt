@@ -50,3 +50,12 @@
 (define (print-inorder tree)
   (display (inorder-values tree))
   (newline))
+
+; Display the recursively collected inorder, preorder, and postorder lists, each on its own line.
+(define (print-all-traversals tree)
+  (display (inorder-values tree))
+  (newline)
+  (display (preorder-values tree))
+  (newline)
+  (display (postorder-values tree))
+  (newline))
