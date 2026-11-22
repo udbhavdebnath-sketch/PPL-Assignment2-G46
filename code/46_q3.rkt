@@ -45,3 +45,8 @@
          (let* ((left-count (leaf-count (cadr tree)))
                 (right-count (leaf-count (caddr tree))))
            (+ left-count right-count)))))
+
+; Display the recursively collected inorder values, then exactly one newline.
+(define (print-inorder tree)
+  (display (inorder-values tree))
+  (newline))
