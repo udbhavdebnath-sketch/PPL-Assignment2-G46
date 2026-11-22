@@ -41,3 +41,14 @@
 ; insert-if-short is make-inserter with len-ok? true when the original length is less than n
 (define (insert-if-short x lst n)
   ((make-inserter x (lambda (k) (< k n))) lst))
+
+
+; read x, then lst, then n from stdin (let* fixes the order),
+; then display (insert-if-short x lst n) followed by a newline
+(define (print-insert-result)
+  (let* ((x (read))
+         (lst (read))
+         (n (read)))
+    (display (insert-if-short x lst n))
+    (newline)))
+
