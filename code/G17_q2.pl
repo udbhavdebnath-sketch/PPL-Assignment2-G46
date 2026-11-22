@@ -80,4 +80,10 @@ equation(Numbers, Equation) :-
 %  once/1 limits this public predicate to the first solution of equation/2.
 generate_equation(Numbers, Equation) :-
     once(equation(Numbers, Equation)).
+
+%% all_equations(+Numbers, -Equations)
+%  Declarative reading: Equations is the sorted, duplicate-free list of valid equations for Numbers.
+all_equations(Numbers, Equations) :-
+    findall(Equation, equation(Numbers, Equation), Generated),
+    sort(Generated, Equations).
     
