@@ -111,3 +111,28 @@ solve(Solution) :-
     clue(6, Solution),
     clue(7, Solution),
     clue(8, Solution).
+
+
+% Print one valid solution in the required format.
+
+main :-
+    once(solve(Solution)),
+
+    Solution = [
+        p(Name1, Dept1, Lang1, Project1),
+        p(Name2, Dept2, Lang2, Project2),
+        p(Name3, Dept3, Lang3, Project3),
+        p(Name4, Dept4, Lang4, Project4)
+    ],
+
+    format('~a = [~a, ~a, ~a]~n',
+           [Name1, Dept1, Lang1, Project1]),
+
+    format('~a = [~a, ~a, ~a]~n',
+           [Name2, Dept2, Lang2, Project2]),
+
+    format('~a = [~a, ~a, ~a]~n',
+           [Name3, Dept3, Lang3, Project3]),
+
+    format('~a = [~a, ~a, ~a]~n',
+           [Name4, Dept4, Lang4, Project4]).
