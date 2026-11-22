@@ -20,3 +20,11 @@
       (cons (car tree)
             (my-append (preorder-values (cadr tree))
                        (preorder-values (caddr tree))))))
+
+; Postorder of () is (); otherwise join the left subtree's values, the right subtree's values, then the node.
+(define (postorder-values tree)
+  (if (null? tree)
+      '()
+      (my-append (postorder-values (cadr tree))
+                 (my-append (postorder-values (caddr tree))
+                            (list (car tree))))))
