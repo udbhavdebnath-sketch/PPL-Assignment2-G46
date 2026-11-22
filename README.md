@@ -53,7 +53,8 @@ PPL-Assignment2-G46/
 │
 ├── skills/
 │   ├── prolog-dev/
-│   │   └── SKILL.md
+│   │   └── SKILL_P1.md
+|   |   └── SKILL_P2.md
 │   │
 │   └── scheme-dev/
 │       └── SKILL.md
