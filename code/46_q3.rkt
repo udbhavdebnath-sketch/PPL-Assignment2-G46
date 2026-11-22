@@ -5,3 +5,10 @@
   (if (null? xs)
       ys
       (cons (car xs) (my-append (cdr xs) ys))))
+
+; Inorder of () is (); otherwise join the left subtree's values, the node, and the right subtree's values.
+(define (inorder-values tree)
+  (if (null? tree)
+      '()
+      (my-append (inorder-values (cadr tree))
+                 (cons (car tree) (inorder-values (caddr tree))))))
