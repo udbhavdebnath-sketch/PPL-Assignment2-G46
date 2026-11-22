@@ -98,6 +98,10 @@ clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
 
+% CLUE 9: The friend who prefers embedded projects works in the design department.
+clue(9, Solution) :-
+    member(p(_, design, _, embedded), Solution).
+
 
 % Generate a solution that satisfies all the original clues.
 
@@ -159,3 +163,5 @@ count_solutions(Active, N) :-
         Solutions
     ),
     length(Solutions, N).
+
+
