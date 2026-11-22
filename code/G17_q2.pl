@@ -5,3 +5,31 @@
 split([First, Second|Rest], [First], [Second|Rest]).
 split([First, Second|Rest], [First|Left], Right) :-
     split([Second|Rest], Left, Right).
+
+%% apply_op(+Op, +A, +B, -Value)
+%  Declarative reading: Value is the exact integer result of applying Op to A and B.
+apply_op('+', A, B, Value) :-
+    Value is A + B.
+apply_op('-', A, B, Value) :-
+    Value is A - B.
+apply_op('*', A, B, Value) :-
+    Value is A * B.
+apply_op('/', A, B, Value) :-
+    B =\= 0,
+    A mod B =:= 0,
+    Value is A // B.
+
+%% expr(+Numbers, -Tree, -Value)
+%  Declarative reading: Tree uses every number in Numbers once, in order, and
+%  Value is its integer value using exact, nonzero-divisor arithmetic.
+%  Recursive reading: a singleton is a number leaf; otherwise split Numbers
+%  into two nonempty parts, recursively build each subtree, and join them with
+%  an operator whose result is valid under apply_op/4.
+expr([N], num(N), N).
+expr(Numbers, op(Op, LeftTree, RightTree), Value) :-
+    split(Numbers, LeftNumbers, RightNumbers),
+    expr(LeftNumbers, LeftTree, LeftValue),
+    expr(RightNumbers, RightTree, RightValue),
+    member(Op, ['+', '-', '*', '/']),
+    apply_op(Op, LeftValue, RightValue, Value).
+    
