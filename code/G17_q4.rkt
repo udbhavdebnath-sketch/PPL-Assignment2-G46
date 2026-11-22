@@ -7,3 +7,13 @@
         acc
         (loop (cdr rest) (+ acc 1)))))
 
+
+
+; reverse of () is acc; reverse of (a . rest) is reverse of rest with a consed onto acc
+(define (my-reverse lst)
+  (let loop ((rest lst) (acc '()))
+    (if (null? rest)
+        acc
+        (loop (cdr rest) (cons (car rest) acc)))))
+
+
