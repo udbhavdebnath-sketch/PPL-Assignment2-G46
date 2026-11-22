@@ -8,7 +8,7 @@ description: Rules and checklist for writing Racket (Scheme) code for CS F301 As
 ## Language and version
 - Racket 8.x. Every file starts with `#lang racket/base`.
 - Solution files contain ONLY definitions. No top-level calls, nothing printed on load, no `provide`.
-- The grader runs `racket G17_q3.rkt` / `racket G17_q4.rkt` and appends its own calls to the end of the file.
+- The grader runs `racket 46_q3.rkt` / `racket 46_q4.rkt` and appends its own calls to the end of the file.
 
 ## Allowed built-ins (nothing else)
 define, lambda, let, let*, letrec, named let, if, cond (with else), and, or, not, begin,
@@ -31,14 +31,14 @@ For output labels use symbols (e.g. 'PASS), never strings.
 - One prompt = one function, one test file or one review. Never write the whole problem at once.
 
 ## Repo layout
-code/G17_q4.rkt, tests/S2_calls.rkt, prompts/S2.md, skills/scheme-dev/SKILL.md
+code/46_q4.rkt, tests/S2_calls.rkt, prompts/S2.md, skills/scheme-dev/SKILL.md
 
 ## How to run and test
-- Load check (must print nothing):  racket code/G17_q4.rkt
+- Load check (must print nothing):  racket code/46_q4.rkt
 - Tests (calls file has no #lang line):
-  cat code/G17_q4.rkt tests/S2_calls.rkt > /tmp/t.rkt && racket /tmp/t.rkt
+  cat code/46_q4.rkt tests/S2_calls.rkt > /tmp/t.rkt && racket /tmp/t.rkt
 - Functions that use read:
-  (cat code/G17_q4.rkt; echo "(print-insert-result)") > /tmp/p.rkt
+  (cat code/46_q4.rkt; echo "(print-insert-result)") > /tmp/p.rkt
   echo "42 ((1 2) (3 4 5) (6) ()) 3" | racket /tmp/p.rkt
 
 ## Self-review checklist (apply before every answer)

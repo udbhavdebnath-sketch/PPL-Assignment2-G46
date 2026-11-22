@@ -26,3 +26,18 @@
 
 
 
+; insert of lst: apply insert to every sublist of lst (atoms stay as they are),
+; then cons x onto the result if lst's original length is less than n
+(define (insert-if-short x lst n)
+  (let ((processed
+         (my-map (lambda (e)
+                   (if (or (null? e) (pair? e))
+                       (insert-if-short x e n)
+                       e))
+                 lst)))
+    (if (< (my-length lst) n)
+        (cons x processed)
+        processed)))
+
+
+
