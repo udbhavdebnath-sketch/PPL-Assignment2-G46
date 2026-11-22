@@ -63,4 +63,15 @@ tree_string(op(Op, LeftTree, RightTree), String) :-
     ),
     atom_string(Op, OperatorString),
     format(string(String), "~s~s~s", [ParenthesizedLeft, OperatorString, ParenthesizedRight]).
+
+%% equation(+Numbers, -Equation)
+%  Declarative reading: Equation joins equal-valued expressions over Numbers in order.
+equation(Numbers, Equation) :-
+    split(Numbers, LeftNumbers, RightNumbers),
+    expr(LeftNumbers, LeftTree, LeftValue),
+    expr(RightNumbers, RightTree, RightValue),
+    LeftValue =:= RightValue,
+    tree_string(LeftTree, LeftString),
+    tree_string(RightTree, RightString),
+    format(string(Equation), "~s=~s", [LeftString, RightString]).
     
