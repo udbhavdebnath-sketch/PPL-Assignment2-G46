@@ -42,3 +42,23 @@
 
 
 
+; make-inserter returns a closure that captures x and len-ok?.
+; Reading of the returned function: apply it to every sublist of lst (atoms stay
+; as they are), then cons x onto the result if (len-ok? (original length of lst)) is true
+(define (make-inserter x len-ok?)
+  (letrec ((insert
+            (lambda (lst)
+              (let ((processed
+                     (my-map (lambda (e)
+                               (if (or (null? e) (pair? e))
+                                   (insert e)
+                                   e))
+                             lst)))
+                (if (len-ok? (my-length lst))
+                    (cons x processed)
+                    processed)))))
+    insert))
+
+
+
+    
