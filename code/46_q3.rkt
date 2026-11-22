@@ -28,3 +28,11 @@
       (my-append (postorder-values (cadr tree))
                  (my-append (postorder-values (caddr tree))
                             (list (car tree))))))
+
+; Height of () is 0; otherwise it is 1 plus the larger of the left and right subtree heights.
+(define (tree-height tree)
+  (if (null? tree)
+      0
+      (let* ((left-height (tree-height (cadr tree)))
+             (right-height (tree-height (caddr tree))))
+        (+ 1 (max left-height right-height)))))
