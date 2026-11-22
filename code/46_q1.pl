@@ -97,3 +97,17 @@ clue(7, Solution) :-
 clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
+
+
+% Generate a solution that satisfies all the original clues.
+
+solve(Solution) :-
+    base_solution(Solution),
+    clue(1, Solution),
+    clue(2, Solution),
+    clue(3, Solution),
+    clue(4, Solution),
+    clue(5, Solution),
+    clue(6, Solution),
+    clue(7, Solution),
+    clue(8, Solution).
