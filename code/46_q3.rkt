@@ -59,3 +59,8 @@
   (newline)
   (display (postorder-values tree))
   (newline))
+
+; Display the recursively computed height and leaf count as a list, then exactly one newline.
+(define (print-height-and-leaves tree)
+  (display (list (tree-height tree) (leaf-count tree)))
+  (newline))
