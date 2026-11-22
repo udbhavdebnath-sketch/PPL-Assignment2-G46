@@ -36,3 +36,12 @@
       (let* ((left-height (tree-height (cadr tree)))
              (right-height (tree-height (caddr tree))))
         (+ 1 (max left-height right-height)))))
+
+; Empty trees have 0 leaves; a node with two empty subtrees has 1; otherwise sum the subtree leaf counts.
+(define (leaf-count tree)
+  (cond ((null? tree) 0)
+        ((and (null? (cadr tree)) (null? (caddr tree))) 1)
+        (else
+         (let* ((left-count (leaf-count (cadr tree)))
+                (right-count (leaf-count (caddr tree))))
+           (+ left-count right-count)))))
